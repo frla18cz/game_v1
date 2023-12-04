@@ -9,11 +9,12 @@ from streamlit_lottie import st_lottie
 
 
 
-# Inicializace
+# Inicializace api key a ID. Uloženo na cloudu streamlit v secret
 openai.api_key = st.secrets["API_KEY"]
 assistant_id = st.secrets["ASSISTANT_ID"]
 
 client = openai
+
 def initialize_session():
     """Inicializuje session state pro Streamlit aplikaci a automaticky spouští chat."""
     if "start_chat" not in st.session_state:
@@ -44,20 +45,6 @@ def exit_chat():
     if st.button("Exit Chat"):
         st.session_state.messages = []  # Clear the chat history
         st.session_state.thread_id = None
-
-# def handle_chat():
-#     """Zpracovává logiku chatu, včetně zobrazování zpráv a zpracování uživatelských vstupů."""
-#     # Zobrazit existující zprávy
-#     display_messages()
-
-#     # Zpracovat nový uživatelský vstup
-#     user_input = st.text_input("Zadejte váš dotaz:", key="user_input")
-
-#     if user_input:
-#         send_message_to_openai(user_input)
-
-        
-    # display_messages()
     process_user_input()
 
 def display_messages():
@@ -142,7 +129,18 @@ def load_lottieurl(url: str):
 
 # Nastavení Streamlit
 st.set_page_config(page_title="Hádej, kdo jsem?", page_icon=":speech_balloon:")
-st.title("Hádej, kdo jsem?")
+# st.title("Hádej, kdo jsem?")
+st.markdown("""
+<style>
+.rainbow {
+    color: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red); 
+    font-size: 50px;
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown('<p class="rainbow">😂 Hádej, kdo jsem?</p>', unsafe_allow_html=True)
+
 
 current_directory = os.path.dirname(os.path.abspath(__file__))
 img_path = os.path.join(current_directory, 'img1.png')
@@ -156,6 +154,9 @@ if lottie_json and ("lottie_loaded" not in st.session_state or not st.session_st
     # Zobrazení Lottie animace s popiskem
     st_lottie(lottie_json, key="loading", height=200, width=200)
     st.text("Načítám hru...")
+    bar = st.progress(50)
+    time.sleep(3)
+    bar.progress(100)
     st.session_state.lottie_loaded = True
 
 model_choice = st.sidebar.selectbox(
