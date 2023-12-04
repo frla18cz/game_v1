@@ -145,10 +145,10 @@ if lottie_json and ("lottie_loaded" not in st.session_state or not st.session_st
     # Zobrazení Lottie animace s popiskem
     st_lottie(lottie_json, key="loading", height=200, width=200)
     st.text("Načítám hru...")
+    st.session_state.lottie_loaded = True
     bar = st.progress(1)
     time.sleep(1)
-    bar.progress(100)
-    st.session_state.lottie_loaded = True
+    
 
 model_choice = st.sidebar.selectbox(
     'Vyberte model:',
