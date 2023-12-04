@@ -13,9 +13,6 @@ from streamlit_lottie import st_lottie
 openai.api_key = st.secrets["API_KEY"]
 assistant_id = st.secrets["ASSISTANT_ID"]
 
-st.write(f"api key: {openai.api_key}")
-st.write(f"assistant id: {assistant_id}")
-
 client = openai
 def initialize_session():
     """Inicializuje session state pro Streamlit aplikaci a automaticky spouští chat."""
