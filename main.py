@@ -15,6 +15,9 @@ assistant_id = st.secrets["ASSISTANT_ID"]
 
 client = openai
 
+if "show_spinner" not in st.session_state:
+    st.session_state.show_spinner = False
+
 def initialize_session():
     """Inicializuje session state pro Streamlit aplikaci a automaticky spouští chat."""
     if "start_chat" not in st.session_state:
@@ -116,6 +119,8 @@ def send_message_to_openai(prompt):
         st.session_state.messages.append({"role": "assistant", "content": message.content[0].text.value})
         with st.chat_message("assistant"):
             st.markdown(message.content[0].text.value)
+    st.session_state.show_spinner = False
+
 def load_lottieurl(url: str):
     try:
         r = requests.get(url)
@@ -146,8 +151,10 @@ if lottie_json and ("lottie_loaded" not in st.session_state or not st.session_st
     st_lottie(lottie_json, key="loading", height=200, width=200)
     st.text("Načítám hru...")
     st.session_state.lottie_loaded = True
-    bar = st.progress(1)
-    time.sleep(1)
+
+    if st.session_state.show_spinner:
+        with st.spinner("Načítám..."):
+            time.sleep(1)  # Příklad: simulace dlouhého načítání
     
 
 model_choice = st.sidebar.selectbox(
