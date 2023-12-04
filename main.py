@@ -129,17 +129,8 @@ def load_lottieurl(url: str):
 
 # Nastavení Streamlit
 st.set_page_config(page_title="Hádej, kdo jsem?", page_icon=":speech_balloon:")
-# st.title("Hádej, kdo jsem?")
-st.markdown("""
-<style>
-.rainbow {
-    color: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red); 
-    font-size: 50px;
-}
-</style>
-""", unsafe_allow_html=True)
+st.title("😂 Hádej! kdo jsem?")
 
-st.markdown('<p class="rainbow">😂 Hádej, kdo jsem?</p>', unsafe_allow_html=True)
 
 
 current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -154,8 +145,8 @@ if lottie_json and ("lottie_loaded" not in st.session_state or not st.session_st
     # Zobrazení Lottie animace s popiskem
     st_lottie(lottie_json, key="loading", height=200, width=200)
     st.text("Načítám hru...")
-    bar = st.progress(50)
-    time.sleep(3)
+    bar = st.progress(1)
+    time.sleep(1)
     bar.progress(100)
     st.session_state.lottie_loaded = True
 
