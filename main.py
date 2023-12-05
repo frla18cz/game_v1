@@ -91,6 +91,8 @@ def send_message_to_openai(prompt):
     """
     start_time = time.time()  # Začátek měření času
 
+    exit_chat()
+
     client.beta.threads.messages.create(
         thread_id=st.session_state.thread_id,
         role="user",
@@ -102,6 +104,14 @@ def send_message_to_openai(prompt):
         thread_id=st.session_state.thread_id,
         assistant_id=assistant_id,
     )
+
+    # Čekání na dokončení dotazu
+    while run.status != 'completed':
+        time.sleep(1)
+        run = client.beta.threads.runs.retrieve(
+            thread_id=st.session_state.thread_id,
+            run_id=run.id
+        )
 
     end_time = time.time()  # Konec měření času
     response_time = end_time - start_time  # Výpočet doby odezvy
@@ -142,6 +152,12 @@ def load_lottieurl(url: str):
 
 
 
+# Nastavení Streamlit
+st.set_page_config(page_title="Hádej, kdo jsem?", page_icon=":speech_balloon:")
+st.title("😊💡Hádej, kdo jsem?!🔍")
+
+
+
 current_directory = os.path.dirname(os.path.abspath(__file__))
 img_path = os.path.join(current_directory, 'img1.png')
 st.image(img_path, caption='', use_column_width=True)
@@ -168,4 +184,3 @@ model_choice = st.sidebar.selectbox(
 
 
 initialize_session()
-exit_chat()
