@@ -22,8 +22,8 @@ st.markdown("""
 
 # Inicializace api key a ID. Uloženo na cloudu streamlit v secret
 openai.api_key = st.secrets["API_KEY"]
-# assistant_id = st.secrets["ASSISTANT_ID"]
-assistant_id = "asst_BKQW828sBQ2R22D6NVfgo1fB" #Pro testovací účely, light prompt
+assistant_id = st.secrets["ASSISTANT_ID"]
+# assistant_id = "asst_BKQW828sBQ2R22D6NVfgo1fB" #Pro testovací účely, light prompt
 client = openai
 
 
