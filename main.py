@@ -50,6 +50,7 @@ def exit_chat():
         st.session_state.messages = []  # Clear the chat history
         st.session_state.thread_id = None
     process_user_input()
+    lottie_animation("https://lottie.host/2b556f4b-1b93-477e-a421-9e31f4511246/tKYol4Wo3r.json") 
 
 def display_messages():
     """Zobrazuje zprávy v chatovacím rozhraní."""
@@ -165,6 +166,9 @@ model_choice = st.sidebar.selectbox(
 
 
 
+lottie_animation("https://lottie.host/2b556f4b-1b93-477e-a421-9e31f4511246/tKYol4Wo3r.json") 
+
+
 initialize_session()
 exit_chat()
-lottie_animation("https://lottie.host/ae43b28d-b082-4249-bc22-144e1ceed7f7/ebUqhkyptl.json") 
+
