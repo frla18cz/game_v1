@@ -8,19 +8,6 @@ import requests
 from streamlit_lottie import st_lottie
 
 
-# Integrace Bootstrap
-st.markdown("""
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <style>
-        @media (max-width: 768px) {
-            .stTextInput > div > div > input {
-                font-size: 14px;
-                padding: 10px;
-            }
-        }
-    </style>
-""", unsafe_allow_html=True)
-
 # Inicializace api key a ID. Uloženo na cloudu streamlit v secret
 openai.api_key = st.secrets["API_KEY"]
 # assistant_id = st.secrets["ASSISTANT_ID"]
@@ -75,7 +62,7 @@ def process_user_input():
     """Zpracovává uživatelský vstup a odesílá jej do OpenAI."""
     prompt = st.chat_input("...")
     if prompt:
-        st.write("Já :-):", prompt)
+        st.write("Já😊: ", prompt)
 
         send_message_to_openai(prompt)
 
