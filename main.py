@@ -7,12 +7,6 @@ import os
 import requests
 from streamlit_lottie import st_lottie
 
-import streamlit as st
-
-
-
-# Zbytek vaší aplikace...
-
 
 # Inicializace api key a ID. Uloženo na cloudu streamlit v secret
 openai.api_key = st.secrets["API_KEY"]
@@ -45,8 +39,7 @@ def send_initial_message():
     send_message_to_openai(initial_message)
 
 
-def exit_chat():
-    """Ukončí chatovací session a vymaže historii chatu."""
+def chat():
     # if st.button("Exit Chat"):
     #     st.session_state.messages = []  # Clear the chat history
     #     st.session_state.thread_id = None
@@ -64,7 +57,7 @@ def display_messages():
 
 def process_user_input():
     """Zpracovává uživatelský vstup a odesílá jej do OpenAI."""
-    prompt = st.text_input("...")
+    prompt = st.chat_input("...")
     if prompt:
         st.write("Já😊: ", prompt)
 
@@ -176,5 +169,5 @@ model_choice = st.sidebar.selectbox(
 )
 
 initialize_session()
-exit_chat()
+chat()
 
