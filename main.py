@@ -7,17 +7,23 @@ import os
 import requests
 from streamlit_lottie import st_lottie
 
-import streamlit as st
-
-
-
-# Zbytek vaší aplikace...
-
+# Integrace Bootstrap
+st.markdown("""
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        @media (max-width: 768px) {
+            .stTextInput > div > div > input {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+    </style>
+""", unsafe_allow_html=True)
 
 # Inicializace api key a ID. Uloženo na cloudu streamlit v secret
 openai.api_key = st.secrets["API_KEY"]
-assistant_id = st.secrets["ASSISTANT_ID"]
-
+# assistant_id = st.secrets["ASSISTANT_ID"]
+assistant_id = "asst_BKQW828sBQ2R22D6NVfgo1fB" #Pro testovací účely, light prompt
 client = openai
 
 
@@ -133,6 +139,14 @@ def load_lottieurl(url: str):
         st.error(f"Chyba požadavku: {e}")
     return None
 
+
+# Načtení obsahu README souboru
+with open('README.md', 'r') as file:
+    readme_text = file.read()
+
+# Zobrazení README v sidebaru
+st.sidebar.markdown(readme_text)
+
 # Nastavení Streamlit
 st.set_page_config(page_title="Hádej, kdo jsem?", page_icon=":speech_balloon:")
 st.title("😊💡Hádej, kdo jsem?!")
@@ -158,7 +172,7 @@ if lottie_json and ("lottie_loaded" not in st.session_state or not st.session_st
 
 model_choice = st.sidebar.selectbox(
     'Vyberte model:',
-    ('gpt-4-1106-preview', 'gpt-3.5-turbo-16k'),
+    ('gpt-4-1106-preview', 'gpt-3.5-turbo-16k', 'gpt-3.5-turbo'),
     index=0
 )
 
