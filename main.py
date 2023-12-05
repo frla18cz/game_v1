@@ -7,6 +7,21 @@ import os
 import requests
 from streamlit_lottie import st_lottie
 
+import streamlit as st
+
+# Vložení vlastního CSS
+st.markdown("""
+    <style>
+    @media (max-width: 768px) {
+        .stTextInput > div > div > input {
+            font-size: 16px;
+            padding: 10px;
+        }
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# Zbytek vaší aplikace...
 
 
 # Inicializace api key a ID. Uloženo na cloudu streamlit v secret
