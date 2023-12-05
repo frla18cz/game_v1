@@ -50,7 +50,8 @@ def exit_chat():
     if st.button("Exit Chat"):
         st.session_state.messages = []  # Clear the chat history
         st.session_state.thread_id = None
-        st.experimental_rerun()  # Reset the chat session
+        st.refresh()  # Refresh the page
+
     process_user_input()
     lottie_animation("https://lottie.host/2b556f4b-1b93-477e-a421-9e31f4511246/tKYol4Wo3r.json",3) 
 
