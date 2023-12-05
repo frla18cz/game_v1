@@ -132,7 +132,7 @@ def load_lottieurl(url: str):
         st.error(f"Chyba požadavku: {e}")
     return None
 
-def lottie_animation(lottie_url, key):
+def lottie_animation_uvodni(lottie_url, key):
 # Načtení Lottie animace z URL
     # lottie_url = lottie_url
     lottie_json = load_lottieurl(lottie_url)
@@ -144,6 +144,14 @@ def lottie_animation(lottie_url, key):
         st.session_state.lottie_loaded = True
         with st.spinner(text='In progress'):
             time.sleep(1)
+def lottie_animation(lottie_url, key):
+# Načtení Lottie animace z URL
+    # lottie_url = lottie_url
+    lottie_json = load_lottieurl(lottie_url)
+
+    # Zobrazení Lottie animace s popiskem
+    st_lottie(lottie_json, key=key, height=200, width=200)
+
 
 # Nastavení Streamlit
 st.set_page_config(page_title="Hádej, kdo jsem?", page_icon=":speech_balloon:")
@@ -155,7 +163,7 @@ current_directory = os.path.dirname(os.path.abspath(__file__))
 img_path = os.path.join(current_directory, 'img1.png')
 st.image(img_path, caption='', use_column_width=True)
 
-lottie_animation("https://lottie.host/ae43b28d-b082-4249-bc22-144e1ceed7f7/ebUqhkyptl.json",1) 
+lottie_animation_uvodni("https://lottie.host/ae43b28d-b082-4249-bc22-144e1ceed7f7/ebUqhkyptl.json",1) 
 
 model_choice = st.sidebar.selectbox(
     'Vyberte model:',
