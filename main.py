@@ -46,6 +46,7 @@ def send_initial_message():
 
 def exit_chat():
     """Ukončí chatovací session a vymaže historii chatu."""
+    process_user_input()
     if st.button("Exit Chat"):
         st.session_state.messages = []  # Clear the chat history
         st.session_state.thread_id = None
@@ -156,9 +157,10 @@ if lottie_json and ("lottie_loaded" not in st.session_state or not st.session_st
 
 model_choice = st.sidebar.selectbox(
     'Vyberte model:',
-    ('gpt-4-1106-preview', 'gpt-3.5-turbo-16k'),
-    index=0
+    ('gpt-4-1106-preview', 'gpt-3.5-turbo-16k', 'gpt-3.5-turbo'),
+    index=2
 )
+
 
 
 
