@@ -7,6 +7,7 @@ import os
 import requests
 from streamlit_lottie import st_lottie
 
+
 # Integrace Bootstrap
 st.markdown("""
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -140,12 +141,6 @@ def load_lottieurl(url: str):
     return None
 
 
-# Načtení obsahu README souboru
-with open('README.md', 'r') as file:
-    readme_text = file.read()
-
-# Zobrazení README v sidebaru
-st.sidebar.markdown(readme_text)
 
 # Nastavení Streamlit
 st.set_page_config(page_title="Hádej, kdo jsem?", page_icon=":speech_balloon:")
