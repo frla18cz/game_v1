@@ -7,18 +7,27 @@ import os
 import requests
 from streamlit_lottie import st_lottie
 
-import streamlit as st
-
-
-
-# Zbytek vaší aplikace...
-
+st.markdown(
+    """
+    <style>
+    @media only screen and (max-width: 768px) {
+        /* Předpokládáme, že třída '.stTextInput' je třída používaná pro st.chat_input */
+        .stTextInput > div {
+            position: fixed; /* Fixní pozice na spodní části obrazovky */
+            bottom: 0; /* Umístění na spodní části */
+            width: 100%; /* Plná šířka */
+            z-index: 999; /* Ujistěte se, že je nad ostatními prvky */
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Inicializace api key a ID. Uloženo na cloudu streamlit v secret
 openai.api_key = st.secrets["API_KEY"]
 # assistant_id = st.secrets["ASSISTANT_ID"]
 assistant_id = "asst_BKQW828sBQ2R22D6NVfgo1fB" #Pro testovací účely, light prompt
-
 client = openai
 
 
@@ -43,6 +52,9 @@ def send_initial_message():
     initial_message = "Zahajme hru!"
     st.session_state.messages = [{"role": "assistant", "content": initial_message}]
     send_message_to_openai(initial_message)
+
+
+
 
 def exit_chat():
     """Ukončí chatovací session a vymaže historii chatu."""
@@ -73,6 +85,7 @@ def send_message_to_openai(prompt):
         prompt (str): Text zprávy odeslané uživatelem.
     """
     start_time = time.time()  # Začátek měření času
+
 
     client.beta.threads.messages.create(
         thread_id=st.session_state.thread_id,
@@ -131,10 +144,11 @@ def load_lottieurl(url: str):
         st.error(f"Chyba požadavku: {e}")
     return None
 
+
+
 # Nastavení Streamlit
 st.set_page_config(page_title="Hádej, kdo jsem?", page_icon=":speech_balloon:")
 st.title("😊💡Hádej, kdo jsem?!🔍")
-
 
 
 current_directory = os.path.dirname(os.path.abspath(__file__))
@@ -156,11 +170,10 @@ if lottie_json and ("lottie_loaded" not in st.session_state or not st.session_st
 
 model_choice = st.sidebar.selectbox(
     'Vyberte model:',
-    ('gpt-4-1106-preview', 'gpt-3.5-turbo-16k'),
-    index=0
+    ('gpt-4-1106-preview', 'gpt-3.5-turbo-16k', 'gpt-3.5-turbo'),
+    index=2
 )
 
 
 
 initialize_session()
-exit_chat()
