@@ -7,17 +7,11 @@ import os
 import requests
 from streamlit_lottie import st_lottie
 
-import streamlit as st
-
-
-
-# Zbytek vaší aplikace...
-
 
 # Inicializace api key a ID. Uloženo na cloudu streamlit v secret
 openai.api_key = st.secrets["API_KEY"]
 assistant_id = st.secrets["ASSISTANT_ID"]
-
+# assistant_id = "asst_BKQW828sBQ2R22D6NVfgo1fB" #Pro testovací účely, light prompt
 client = openai
 
 
@@ -31,7 +25,7 @@ def initialize_session():
 
     if "initial_message_sent" not in st.session_state:
         # Kontrola, zda už nebyla úvodní zpráva přidána
-        if not any(message["content"] == "Ahoj, pojďme si zahát!" for message in st.session_state.messages):
+        if not any(message["content"] == "Zahajme hru!" for message in st.session_state.messages):
             send_initial_message()
             st.session_state.initial_message_sent = True
 
@@ -39,19 +33,20 @@ def initialize_session():
 
 def send_initial_message():
     """Odesílá počáteční zprávu do chatu."""
-    initial_message = "Ahoj, pojďme si zahát!"
+    initial_message = "Zahajme hru!"
     st.session_state.messages = [{"role": "assistant", "content": initial_message}]
     send_message_to_openai(initial_message)
 
 
+def chat():
+    # if st.button("Exit Chat"):
+    #     st.session_state.messages = []  # Clear the chat history
+    #     st.session_state.thread_id = None
+    #     js = "window.location.reload()"
+    #     st.markdown(js, unsafe_allow_html=True)
 
-
-def exit_chat():
-    """Ukončí chatovací session a vymaže historii chatu."""
-    if st.button("Exit Chat"):
-        st.session_state.messages = []  # Clear the chat history
-        st.session_state.thread_id = None
     process_user_input()
+    lottie_animation("https://lottie.host/2b556f4b-1b93-477e-a421-9e31f4511246/tKYol4Wo3r.json",3) 
 
 def display_messages():
     """Zobrazuje zprávy v chatovacím rozhraní."""
@@ -63,7 +58,7 @@ def process_user_input():
     """Zpracovává uživatelský vstup a odesílá jej do OpenAI."""
     prompt = st.chat_input("...")
     if prompt:
-        st.write("Já :-):", prompt)
+        st.write("Já😊: ", prompt)
 
         send_message_to_openai(prompt)
 
@@ -133,9 +128,30 @@ def load_lottieurl(url: str):
         st.error(f"Chyba požadavku: {e}")
     return None
 
+def lottie_animation_uvodni(lottie_url, key):
+# Načtení Lottie animace z URL
+    # lottie_url = lottie_url
+    lottie_json = load_lottieurl(lottie_url)
+
+    if lottie_json and ("lottie_loaded" not in st.session_state or not st.session_state.lottie_loaded):
+        # Zobrazení Lottie animace s popiskem
+        st_lottie(lottie_json, key=key, height=200, width=200)
+        st.text("Načítám hru...")
+        st.session_state.lottie_loaded = True
+        with st.spinner(text='In progress'):
+            time.sleep(1)
+def lottie_animation(lottie_url, key):
+# Načtení Lottie animace z URL
+    # lottie_url = lottie_url
+    lottie_json = load_lottieurl(lottie_url)
+
+    # Zobrazení Lottie animace s popiskem
+    st_lottie(lottie_json, key=key, height=200, width=200)
+
+
 # Nastavení Streamlit
 st.set_page_config(page_title="Hádej, kdo jsem?", page_icon=":speech_balloon:")
-st.title("😊💡Hádej, kdo jsem?!")
+st.title("😊💡Hádej, kdo jsem?!🔍")
 
 
 
@@ -143,26 +159,14 @@ current_directory = os.path.dirname(os.path.abspath(__file__))
 img_path = os.path.join(current_directory, 'img1.png')
 st.image(img_path, caption='', use_column_width=True)
 
-# Načtení Lottie animace z URL
-lottie_url = "https://lottie.host/ae43b28d-b082-4249-bc22-144e1ceed7f7/ebUqhkyptl.json"
-lottie_json = load_lottieurl(lottie_url)
-
-if lottie_json and ("lottie_loaded" not in st.session_state or not st.session_state.lottie_loaded):
-    # Zobrazení Lottie animace s popiskem
-    st_lottie(lottie_json, key="loading", height=200, width=200)
-    st.text("Načítám hru...")
-    st.session_state.lottie_loaded = True
-    with st.spinner(text='In progress'):
-        time.sleep(1)
-    
+lottie_animation_uvodni("https://lottie.host/ae43b28d-b082-4249-bc22-144e1ceed7f7/ebUqhkyptl.json",1) 
 
 model_choice = st.sidebar.selectbox(
     'Vyberte model:',
-    ('gpt-4-1106-preview', 'gpt-3.5-turbo-16k'),
-    index=0
+    ('gpt-4-1106-preview', 'gpt-3.5-turbo-16k', 'gpt-3.5-turbo'),
+    index=1
 )
 
-
-
 initialize_session()
-exit_chat()
+chat()
+
