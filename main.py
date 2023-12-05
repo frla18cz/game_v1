@@ -91,7 +91,6 @@ def send_message_to_openai(prompt):
     """
     start_time = time.time()  # Začátek měření času
 
-    exit_chat()
 
     client.beta.threads.messages.create(
         thread_id=st.session_state.thread_id,
