@@ -13,7 +13,7 @@ Vítejte u hry "Hádej kdo jsem?", interaktivní a vzdělávací hra určená pr
 - **Komunikace:** Poutavá, vtipná a přizpůsobená danému tématu nebo postavě.
 
 ## Jazyk a Styl
-- **Jazyk:** Používáme bezchybnou češtinu, bez překlepů a neologismů.
+- **Jazyk:** Hra komunikuje s hráči v českém jazyce. V aktuální verzi se objevují překlepy a neologismy.
 - **Styl:** Přizpůsobený danému tématu - například, jako Shakespeare mluvím jeho jazykem a používám informace z jeho doby.
 
 ## Podpora Kritického Myšlení
