@@ -7,6 +7,22 @@ import os
 import requests
 from streamlit_lottie import st_lottie
 
+st.markdown(
+    """
+    <style>
+    @media only screen and (max-width: 768px) {
+        /* Předpokládáme, že třída '.stTextInput' je třída používaná pro st.chat_input */
+        .stTextInput > div {
+            position: fixed; /* Fixní pozice na spodní části obrazovky */
+            bottom: 0; /* Umístění na spodní části */
+            width: 100%; /* Plná šířka */
+            z-index: 999; /* Ujistěte se, že je nad ostatními prvky */
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Inicializace api key a ID. Uloženo na cloudu streamlit v secret
 openai.api_key = st.secrets["API_KEY"]
@@ -30,7 +46,7 @@ def initialize_session():
 
     if "initial_message_sent" not in st.session_state:
         # Kontrola, zda už nebyla úvodní zpráva přidána
-        if not any(message["content"] == "Ahoj, pojďme si zahát!" for message in st.session_state.messages):
+        if not any(message["content"] == "Zahajme hru!" for message in st.session_state.messages):
             send_initial_message()
             st.session_state.initial_message_sent = True
 
@@ -38,7 +54,7 @@ def initialize_session():
 
 def send_initial_message():
     """Odesílá počáteční zprávu do chatu."""
-    initial_message = "Ahoj, pojďme si zahát!"
+    initial_message = "Zahajme hru!"
     st.session_state.messages = [{"role": "assistant", "content": initial_message}]
     send_message_to_openai(initial_message)
 
