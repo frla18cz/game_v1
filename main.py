@@ -173,7 +173,7 @@ if lottie_json and ("lottie_loaded" not in st.session_state or not st.session_st
 model_choice = st.sidebar.selectbox(
     'Vyberte model:',
     ('gpt-4-1106-preview', 'gpt-3.5-turbo-16k', 'gpt-3.5-turbo'),
-    index=0
+    index=2
 )
 
 
