@@ -7,11 +7,27 @@ import os
 import requests
 from streamlit_lottie import st_lottie
 
+st.markdown(
+    """
+    <style>
+    @media only screen and (max-width: 768px) {
+        /* Předpokládáme, že třída '.stTextInput' je třída používaná pro st.chat_input */
+        .stTextInput > div {
+            position: fixed; /* Fixní pozice na spodní části obrazovky */
+            bottom: 0; /* Umístění na spodní části */
+            width: 100%; /* Plná šířka */
+            z-index: 999; /* Ujistěte se, že je nad ostatními prvky */
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Inicializace api key a ID. Uloženo na cloudu streamlit v secret
 openai.api_key = st.secrets["API_KEY"]
-assistant_id = st.secrets["ASSISTANT_ID"]
-# assistant_id = "asst_BKQW828sBQ2R22D6NVfgo1fB" #Pro testovací účely, light prompt
+# assistant_id = st.secrets["ASSISTANT_ID"]
+assistant_id = "asst_BKQW828sBQ2R22D6NVfgo1fB" #Pro testovací účely, light prompt
 client = openai
 
 
@@ -38,15 +54,14 @@ def send_initial_message():
     send_message_to_openai(initial_message)
 
 
-def chat():
-    # if st.button("Exit Chat"):
-    #     st.session_state.messages = []  # Clear the chat history
-    #     st.session_state.thread_id = None
-    #     js = "window.location.reload()"
-    #     st.markdown(js, unsafe_allow_html=True)
 
+
+def exit_chat():
+    """Ukončí chatovací session a vymaže historii chatu."""
+    if st.button("Exit Chat"):
+        st.session_state.messages = []  # Clear the chat history
+        st.session_state.thread_id = None
     process_user_input()
-    lottie_animation("https://lottie.host/2b556f4b-1b93-477e-a421-9e31f4511246/tKYol4Wo3r.json",3) 
 
 def display_messages():
     """Zobrazuje zprávy v chatovacím rozhraní."""
@@ -70,6 +85,7 @@ def send_message_to_openai(prompt):
         prompt (str): Text zprávy odeslané uživatelem.
     """
     start_time = time.time()  # Začátek měření času
+
 
     client.beta.threads.messages.create(
         thread_id=st.session_state.thread_id,
@@ -128,25 +144,6 @@ def load_lottieurl(url: str):
         st.error(f"Chyba požadavku: {e}")
     return None
 
-def lottie_animation_uvodni(lottie_url, key):
-# Načtení Lottie animace z URL
-    # lottie_url = lottie_url
-    lottie_json = load_lottieurl(lottie_url)
-
-    if lottie_json and ("lottie_loaded" not in st.session_state or not st.session_state.lottie_loaded):
-        # Zobrazení Lottie animace s popiskem
-        st_lottie(lottie_json, key=key, height=200, width=200)
-        st.text("Načítám hru...")
-        st.session_state.lottie_loaded = True
-        with st.spinner(text='In progress'):
-            time.sleep(1)
-def lottie_animation(lottie_url, key):
-# Načtení Lottie animace z URL
-    # lottie_url = lottie_url
-    lottie_json = load_lottieurl(lottie_url)
-
-    # Zobrazení Lottie animace s popiskem
-    st_lottie(lottie_json, key=key, height=200, width=200)
 
 
 # Nastavení Streamlit
@@ -154,19 +151,29 @@ st.set_page_config(page_title="Hádej, kdo jsem?", page_icon=":speech_balloon:")
 st.title("😊💡Hádej, kdo jsem?!🔍")
 
 
-
 current_directory = os.path.dirname(os.path.abspath(__file__))
 img_path = os.path.join(current_directory, 'img1.png')
 st.image(img_path, caption='', use_column_width=True)
 
-lottie_animation_uvodni("https://lottie.host/ae43b28d-b082-4249-bc22-144e1ceed7f7/ebUqhkyptl.json",1) 
+# Načtení Lottie animace z URL
+lottie_url = "https://lottie.host/ae43b28d-b082-4249-bc22-144e1ceed7f7/ebUqhkyptl.json"
+lottie_json = load_lottieurl(lottie_url)
+
+if lottie_json and ("lottie_loaded" not in st.session_state or not st.session_state.lottie_loaded):
+    # Zobrazení Lottie animace s popiskem
+    st_lottie(lottie_json, key="loading", height=200, width=200)
+    st.text("Načítám hru...")
+    st.session_state.lottie_loaded = True
+    with st.spinner(text='In progress'):
+        time.sleep(1)
+    
 
 model_choice = st.sidebar.selectbox(
     'Vyberte model:',
     ('gpt-4-1106-preview', 'gpt-3.5-turbo-16k', 'gpt-3.5-turbo'),
-    index=0
+    index=2
 )
 
-initialize_session()
-chat()
 
+
+initialize_session()
