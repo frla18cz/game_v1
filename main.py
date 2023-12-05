@@ -61,7 +61,7 @@ def display_messages():
 
 def process_user_input():
     """Zpracovává uživatelský vstup a odesílá jej do OpenAI."""
-    prompt = st.text_input("...")
+    prompt = st.chat_input("...")
     if prompt:
         st.write("Já :-):", prompt)
 
