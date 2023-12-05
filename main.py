@@ -46,7 +46,6 @@ def send_initial_message():
 
 def exit_chat():
     """Ukončí chatovací session a vymaže historii chatu."""
-    process_user_input()
     if st.button("Exit Chat"):
         st.session_state.messages = []  # Clear the chat history
         st.session_state.thread_id = None
@@ -132,6 +131,19 @@ def load_lottieurl(url: str):
         st.error(f"Chyba požadavku: {e}")
     return None
 
+def lottie_animation(lottie_url):
+# Načtení Lottie animace z URL
+    # lottie_url = lottie_url
+    lottie_json = load_lottieurl(lottie_url)
+
+    if lottie_json and ("lottie_loaded" not in st.session_state or not st.session_state.lottie_loaded):
+        # Zobrazení Lottie animace s popiskem
+        st_lottie(lottie_json, key="loading", height=200, width=200)
+        st.text("Načítám hru...")
+        st.session_state.lottie_loaded = True
+        with st.spinner(text='In progress'):
+            time.sleep(1)
+
 # Nastavení Streamlit
 st.set_page_config(page_title="Hádej, kdo jsem?", page_icon=":speech_balloon:")
 st.title("😊💡Hádej, kdo jsem?!🔍")
@@ -142,18 +154,7 @@ current_directory = os.path.dirname(os.path.abspath(__file__))
 img_path = os.path.join(current_directory, 'img1.png')
 st.image(img_path, caption='', use_column_width=True)
 
-# Načtení Lottie animace z URL
-lottie_url = "https://lottie.host/ae43b28d-b082-4249-bc22-144e1ceed7f7/ebUqhkyptl.json"
-lottie_json = load_lottieurl(lottie_url)
-
-if lottie_json and ("lottie_loaded" not in st.session_state or not st.session_state.lottie_loaded):
-    # Zobrazení Lottie animace s popiskem
-    st_lottie(lottie_json, key="loading", height=200, width=200)
-    st.text("Načítám hru...")
-    st.session_state.lottie_loaded = True
-    with st.spinner(text='In progress'):
-        time.sleep(1)
-    
+lottie_animation("https://lottie.host/ae43b28d-b082-4249-bc22-144e1ceed7f7/ebUqhkyptl.json") 
 
 model_choice = st.sidebar.selectbox(
     'Vyberte model:',
