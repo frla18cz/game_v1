@@ -95,14 +95,6 @@ def send_message_to_openai(prompt):
         assistant_id=assistant_id,
     )
 
-    # Čekání na dokončení dotazu
-    while run.status != 'completed':
-        time.sleep(1)
-        run = client.beta.threads.runs.retrieve(
-            thread_id=st.session_state.thread_id,
-            run_id=run.id
-        )
-
     end_time = time.time()  # Konec měření času
     response_time = end_time - start_time  # Výpočet doby odezvy
     st.write(f"Doba odezvy: {response_time:.2f} sekund")  # Zobrazení doby odezvy
@@ -144,7 +136,7 @@ def load_lottieurl(url: str):
 
 # Nastavení Streamlit
 st.set_page_config(page_title="Hádej, kdo jsem?", page_icon=":speech_balloon:")
-st.title("😊💡Hádej, kdo jsem?!")
+st.title("😊💡Hádej, kdo jsem?!🔍")
 
 
 
