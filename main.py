@@ -167,3 +167,4 @@ model_choice = st.sidebar.selectbox(
 
 initialize_session()
 exit_chat()
+lottie_animation("https://lottie.host/ae43b28d-b082-4249-bc22-144e1ceed7f7/ebUqhkyptl.json") 
