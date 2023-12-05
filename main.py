@@ -47,12 +47,12 @@ def send_initial_message():
 
 def exit_chat():
     """Ukončí chatovací session a vymaže historii chatu."""
-    if st.button("Exit Chat"):
-        st.session_state.messages = []  # Clear the chat history
-        st.session_state.thread_id = None
-        js = "window.location.reload()"
-        st.markdown(js, unsafe_allow_html=True)
-        
+    # if st.button("Exit Chat"):
+    #     st.session_state.messages = []  # Clear the chat history
+    #     st.session_state.thread_id = None
+    #     js = "window.location.reload()"
+    #     st.markdown(js, unsafe_allow_html=True)
+
     process_user_input()
     lottie_animation("https://lottie.host/2b556f4b-1b93-477e-a421-9e31f4511246/tKYol4Wo3r.json",3) 
 
