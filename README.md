@@ -1,10 +1,10 @@
 # Hra: "Hádej kdo jsem?" pro školní prostředí
 
 ## Úvod
-Vítejte u hry "Hádej kdo jsem?", interaktivní a vzdělávací hra určená pro děti ve školním věku. Cílem hry je uhodnout, kdo nebo co "jsem", a to v rámci maximálně 10 pokusů.
+Vítejte u hry "Hádej kdo jsem?", vzdělávací hra určená pro děti ve školním věku. Cílem hry je uhodnout, kdo nebo co "jsem", a to v rámci maximálně 10 pokusů.
 
 ## Parametry Hry
-- **Rozmanitost:** Můžete narazit na cokoliv - osobnost, předmět, prvek, nebo něco abstraktního, s výběrem z různých kategorií jako historie, věda, literatura, matematika, umění a geografie.
+- **Rozmanitost:** Můžete narazit na cokoliv - osobnost, předmět, prvek, zemi, nebo něco abstraktního, s výběrem z různých kategorií jako historie, věda, literatura, matematika, umění a geografie.
 - **Obtížnost:** Vysoká, ale přizpůsobená věkové skupině a vzdělávací úrovni hráče.
 - **Nápovědy:** Skryté a složité, vyžadující logické myšlení, výpočty a znalosti z učebních osnov.
 
@@ -21,14 +21,15 @@ Vítejte u hry "Hádej kdo jsem?", interaktivní a vzdělávací hra určená pr
 - Otázky a nápovědy jsou navrženy tak, aby rozvíjely dovednosti jako kritické myšlení, řešení problémů, paměť a asociaci.
 
 ## Obtížnost a Interakce
-- Hráči si vybírají obtížnost od 5 do 10.
+- Hráč dle zadaného věku vyberem vhodné okruhy témat.
+- Hráči si vybírají obtížnost od 1 do 10.
 - V každém herním kole je zaznamenáno, které kolo právě probíhá (např. 1/10).
 
 ## Závěr a Hodnocení
 - Na konci hry poskytujeme hodnocení, kde shrneme, jak si hráč vedl, co se naučil a na čem by měl zapracovat.
 - Zahrnujeme zpětnou vazbu a doporučení pro další učení.
 
-## Zábavnější Prvky
+## Prvky hry
 - **Role-Playing:** "Hádaný" charakter mluví přímo s hráči, poskytuje nápovědy a reaguje na jejich odpovědi.
 - **Vizuální a Zvukové Efekty(v budoucnu):** Digitální verze hry zahrnující animace, zvukové efekty.
 - **Mini-Hry a Výzvy:** Související s tématem kola, například matematické hádanky.
