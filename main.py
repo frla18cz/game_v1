@@ -28,6 +28,11 @@ assistant_id = "asst_BKQW828sBQ2R22D6NVfgo1fB" #Pro testovací účely, light pr
 client = openai
 
 
+# Zahájení Streamlit
+st.set_page_config(page_title="Hádej, kdo jsem?", page_icon=":speech_balloon:")
+st.title("😊💡Hádej, kdo jsem?!🔍")
+
+
 def initialize_session():
     """Inicializuje session state pro Streamlit aplikaci a automaticky spouští chat."""
     if "start_chat" not in st.session_state:
@@ -131,12 +136,6 @@ def load_lottieurl(url: str):
     except requests.exceptions.RequestException as e:
         st.error(f"Chyba požadavku: {e}")
     return None
-
-
-
-# Nastavení Streamlit
-st.set_page_config(page_title="Hádej, kdo jsem?", page_icon=":speech_balloon:")
-st.title("😊💡Hádej, kdo jsem?!🔍")
 
 
 
