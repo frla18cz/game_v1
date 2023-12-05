@@ -44,13 +44,18 @@ def send_initial_message():
     st.session_state.messages = [{"role": "assistant", "content": initial_message}]
     send_message_to_openai(initial_message)
 
+def reset_messages():
+    if st.button("Reset Messages"):
+        st.session_state.messages = []
+
 def exit_chat():
     """Ukončí chatovací session a vymaže historii chatu."""
     if st.button("Exit Chat"):
         st.session_state.messages = []  # Clear the chat history
         st.session_state.thread_id = None
+        reset_messages()
     process_user_input()
-    # lottie_animation("https://lottie.host/2b556f4b-1b93-477e-a421-9e31f4511246/tKYol4Wo3r.json",3) 
+    lottie_animation("https://lottie.host/2b556f4b-1b93-477e-a421-9e31f4511246/tKYol4Wo3r.json",3) 
 
 def display_messages():
     """Zobrazuje zprávy v chatovacím rozhraní."""
