@@ -130,7 +130,7 @@ def load_lottieurl(url: str):
 
 # Nastavení Streamlit
 st.set_page_config(page_title="Hádej, kdo jsem?", page_icon=":speech_balloon:")
-st.title("😂 Hádej! kdo jsem?")
+st.title("😊💡Hádej, kdo jsem?!")
 
 
 
