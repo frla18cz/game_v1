@@ -171,12 +171,6 @@ model_choice = st.sidebar.selectbox(
     index=2
 )
 
-
-
-
-lottie_animation("https://lottie.host/2b556f4b-1b93-477e-a421-9e31f4511246/tKYol4Wo3r.json",2) 
-
-
 initialize_session()
 exit_chat()
 
